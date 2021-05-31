@@ -1,20 +1,25 @@
-import React ,{useState,useEffect}from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Item from './Item';
 
 function App() {
- const [items,setitems] = useState([]);
- useEffect(async()=>{
-   const data = await fetch('https://fakestoreapi.com/products');
-   const result = await data.json();
-   console.log(result);
- })
+  const [items, setitems] = useState([]);
+  useEffect(async () => {
+    const data = await fetch('https://fakestoreapi.com/products');
+    const result = await data.json();
+    // console.log(result);
+    setitems(result);
+  })
   return (
-     <div>
-       <Header>
-         <input placeholder = "Search items"></input>
-         <button><i className="fas fa-search"></i></button>
-       </Header>
-     </div>
+    <div>
+      <Header>
+        <input placeholder="Search items"></input>
+        <button><i className="fas fa-search"></i></button>
+      </Header>
+      <Items>
+      {items.map(item=>(<Item key={item.id} image={item.image} title={item.title} price={item.price} description={item.description} category={item.category}></Item>))} 
+      </Items>
+    </div>
   );
 }
 
@@ -47,4 +52,14 @@ const Header = styled.header`
    color: white;
    border: none;
  }
+`
+
+const Items = styled.div`
+  margin-top : 20px;
+  display:grid;
+  grid-template-columns : repeat(auto-fit,400px);
+  gap:10px;
+  min-height:80vh;
+  width:90vw;
+  margin : 10px auto;
 `
