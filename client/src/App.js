@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Item from './Item';
 
+
 function App() {
   const [items, setitems] = useState([]);
   useEffect(async () => {
@@ -12,6 +13,7 @@ function App() {
   })
   return (
     <div>
+
       <Header>
         <input placeholder="Search items"></input>
         <button><i className="fas fa-search"></i></button>
